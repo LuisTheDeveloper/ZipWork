@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="4.5.3.2" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="79.0.3945.3600" />
   </ItemGroup>
 

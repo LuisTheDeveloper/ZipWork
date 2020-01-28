@@ -14,6 +14,22 @@ namespace ZipWork
         private string ZipFileName;
         public int FileCount;
 
+        public int ActurisNB;
+        public int ActurisMTA;
+        public int ActurisRNC;
+
+        public int AppliedNB;
+        public int AppliedMTA;
+        public int AppliedRNC;
+
+        public int CDLNB;
+        public int CDLMTA;
+        public int CDLRNC;
+
+        public int SSPNB;
+        public int SSPMTA;
+        public int SSPRNC;
+
         public ZipManager()
         {
             wInfo = "";
@@ -25,33 +41,20 @@ namespace ZipWork
             return wFileCount;
         }
 
-
-        public void CheckZipFolder()
+        // Read each zip file from the current daily folder here:
+        public bool CheckZipFolder()
         {
             string[] ZipFolder = Directory.GetFiles(wPath, "*.zip");
 
+            // Looping through all zip files in the daily zip folder:
             foreach (string filename in ZipFolder)
             {
-                ZipFileName = filename;
-                string wZip = Path.GetFileName(filename).Substring(0,3).ToUpper();
+                ZipFileName = filename; // Get the zip filename
                 FileCount = NumberOfFiles();
-                switch (wZip)
-                {
-                    case "ACT":
-                        Console.WriteLine($"Acturis has {FileCount} files");
-                        break;
-                    case "APP":
-                        Console.WriteLine($"Applied has {FileCount} files");
-                        break;
-                    case "SSP":
-                        Console.WriteLine($"SSP has {FileCount} files");
-                        break;
-                    case "CDL":
-                        Console.WriteLine($"CDL has {FileCount} files");
-                        break;
-                }
-                    
+                if (!(CheckProvider(ZipFileName, FileCount)))
+                    Console.WriteLine($"File:{ZipFileName} is Wrong");
             }
+            return false;
         }
 
         //Count the number of files inside the zip file
@@ -67,8 +70,7 @@ namespace ZipWork
 
             try
             {
-                string wfilename = Path.GetFileName(ZipFileName);
-                bool wBoolean = wfilename.Contains("ACTURIS");
+                string wfilename = Path.GetFileName(ZipFileName);                
 
                 using (ZipArchive csZipArchive = ZipFile.OpenRead(ZipFileName))
                 {
@@ -78,6 +80,8 @@ namespace ZipWork
                             wFileCount += 1;
                     }
                 }
+
+
             }
             catch (UnauthorizedAccessException)
             {
@@ -90,6 +94,81 @@ namespace ZipWork
             }
 
             return wFileCount;
+        }
+
+        private bool CheckProvider(string wZipFileName, int FilesCount)
+        {
+            // Acturis Processing
+            if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("NB"))
+            {
+                ActurisNB = FilesCount;
+                return true;
+            }
+            if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("MTA"))
+            {
+                ActurisMTA = FilesCount;
+                return true;
+            }   
+            if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("RNC"))
+            {
+                ActurisRNC = FilesCount;
+                return true;
+            }
+
+            // Applied Processing
+            if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("NB"))
+            {
+                AppliedNB = FilesCount;
+                return true;
+            }
+            if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("MTA"))
+            {
+                AppliedMTA = FilesCount;
+                return true;
+            }
+            if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("RNC"))
+            {
+                AppliedRNC = FilesCount;
+                return true;
+            }
+                
+            // CDL Processing
+            if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("NB"))
+            {
+                CDLNB = FilesCount;
+                return true;
+            }
+            if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("MTA"))
+            {
+                CDLMTA = FilesCount;
+                return true;
+            }
+            if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("RNC"))
+            {
+                CDLRNC = FilesCount;
+                return true;
+            }
+                
+            // SSP Processing
+            if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("NB"))
+            {
+                SSPNB = FilesCount;
+                return true;
+            }
+                
+            if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("MTA"))
+            {
+                SSPMTA = FilesCount;
+                return true;
+            }
+                
+            if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("RNC"))
+            {
+                SSPRNC = FilesCount;
+                return true;
+            }
+                
+            return false;
         }
 
         public string ZipFilesPath

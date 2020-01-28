@@ -24,9 +24,10 @@ namespace ZipWork
 
         }
 
+        // This method creates the folder for the zip files to be downloaded
         public void SetPaths()
         {
-            if (DevOption)
+            if (DevOption)  //if dev unit testing use a temporary folder
                 myPath = "C:\\temp\\";
             else
                 myPath = Directory.GetCurrentDirectory() + "\\";
@@ -43,11 +44,14 @@ namespace ZipWork
                     wZipPath = Console.ReadLine();
                 }
 
+                // Create the ZIP folder here:
                 if (!Directory.Exists(wZipPath))
                     Directory.CreateDirectory(wZipPath);
             }
         }
 
+        // After download, the zip files should be moved 
+        // from the original folder - myPath to the new folder - wZipPath
         public bool MoveFilesToPath()
         {
             string[] FilesCollect = Directory.GetFiles(myPath, myExtension);
@@ -62,7 +66,7 @@ namespace ZipWork
 
         }
 
-        public string CurrentOriginPath
+        public string OriginalPath
         {
             get { return myPath;  }
             set { myPath = value; }
