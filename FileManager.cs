@@ -11,7 +11,9 @@ namespace ZipWork
         private string wZipPath;
         private string myExtension;
         private bool DevOption;
-        private bool FolderTodaysDate;
+        private bool PlumZipFiles;
+
+        public string FolderName;
 
         public FileManager()
         {
@@ -19,9 +21,6 @@ namespace ZipWork
                 DevOption = true;
             else
                 DevOption = false;
-
-            FolderTodaysDate = true;
-
         }
 
         // This method creates the folder for the zip files to be downloaded
@@ -32,22 +31,22 @@ namespace ZipWork
             else
                 myPath = Directory.GetCurrentDirectory() + "\\";
 
-            Console.WriteLine($"Is this path: {myPath} correct? Y=Yes/N=No");
+            wZipPath = myPath + FolderName + "\\";
+            Console.WriteLine($"Is this path: {wZipPath} correct? Y=Yes/N=No");
             string response = Console.ReadLine();
-            if (response.ToUpper() == "Y")
+            if (response.ToUpper() == "N")
             {
-                if (FolderTodaysDate)
-                    wZipPath = myPath + DateTime.Now.ToString("ddMMyyyy") + "\\";
-                else
-                {
-                    Console.WriteLine("Please type destination folder name:");
-                    wZipPath = Console.ReadLine();
-                }
-
-                // Create the ZIP folder here:
-                if (!Directory.Exists(wZipPath))
-                    Directory.CreateDirectory(wZipPath);
+                Console.WriteLine("Please type destination folder name:");
+                wZipPath = Console.ReadLine();
             }
+
+            // Create the ZIP folder here:
+            if (!Directory.Exists(wZipPath))
+            {
+                Directory.CreateDirectory(wZipPath);
+                Console.WriteLine($"Directory created:{wZipPath}");
+            }
+                    
         }
 
         // After download, the zip files should be moved 
@@ -56,14 +55,14 @@ namespace ZipWork
         {
             string[] FilesCollect = Directory.GetFiles(myPath, myExtension);
 
+            Console.WriteLine("Moving Files...");
             foreach (string filename in FilesCollect)
             {
                 string wFilename = Path.GetFileName(filename);
                 File.Move(filename, wZipPath + wFilename);
+                Console.WriteLine($"File {filename} moved to {wZipPath+wFilename}");
             }
-
             return true;
-
         }
 
         public string OriginalPath
@@ -85,6 +84,11 @@ namespace ZipWork
 
         public bool DevUsage {
             get { return DevOption; }
+        }
+
+        public bool IsPlum {
+            get { return PlumZipFiles ; }
+            set { PlumZipFiles = value ; }
         }
     }
 

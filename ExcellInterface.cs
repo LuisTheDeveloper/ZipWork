@@ -24,7 +24,6 @@ namespace ZipWork
         public int SSPMTA;
         public int SSPRNC;
 
-        private string XlsFile;
         public string SheetName;
 
         public void OpenXls()
@@ -32,15 +31,18 @@ namespace ZipWork
             var fi = new FileInfo(@"c:\temp\Exceptions.xlsx");
             using (var p = new ExcelPackage(fi))
             {
+                Console.WriteLine($"Opening Excel File {fi.Name} to save zipfile count...");
                 //Get the Worksheet created in the previous codesample. 
                 FillUpExcel(p);                 
                 //Save and close the package.
                 p.Save();
+                p.Dispose();
             }
         }
 
         private void FillUpExcel(ExcelPackage p)
         {
+            Console.WriteLine($"Adding data to worksheet {SheetName}");
             p.Workbook.Worksheets.Copy("Template", SheetName);
             var ws = p.Workbook.Worksheets[SheetName];
             //Set the cell value using row and column.

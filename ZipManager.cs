@@ -12,6 +12,8 @@ namespace ZipWork
         private string wPath;
         private string wInfo;
         private string ZipFileName;
+        private string wTodaysDate;
+
         public int FileCount;
 
         public int ActurisNB;
@@ -47,10 +49,12 @@ namespace ZipWork
             string[] ZipFolder = Directory.GetFiles(wPath, "*.zip");
 
             // Looping through all zip files in the daily zip folder:
+            Console.WriteLine("Counting number of files inside each zip file...");
             foreach (string filename in ZipFolder)
             {
                 ZipFileName = filename; // Get the zip filename
-                FileCount = NumberOfFiles();
+                FileCount = NumberOfItems();
+                Console.WriteLine($"filename {ZipFileName} has {FileCount} files inside.");
                 if (!(CheckProvider(ZipFileName, FileCount)))
                     Console.WriteLine($"File:{ZipFileName} is Wrong");
             }
@@ -58,7 +62,7 @@ namespace ZipWork
         }
 
         //Count the number of files inside the zip file
-        private int NumberOfFiles()
+        private int NumberOfItems()
         {
             int wFileCount = 0;
 
@@ -70,18 +74,13 @@ namespace ZipWork
 
             try
             {
-                string wfilename = Path.GetFileName(ZipFileName);                
-
-                using (ZipArchive csZipArchive = ZipFile.OpenRead(ZipFileName))
-                {
+                string wfilename = Path.GetFileName(ZipFileName);
+                using ZipArchive csZipArchive = ZipFile.OpenRead(ZipFileName);
                     foreach (var entry in csZipArchive.Entries)
                     {
                         if (!string.IsNullOrEmpty(entry.Name))
                             wFileCount += 1;
                     }
-                }
-
-
             }
             catch (UnauthorizedAccessException)
             {
@@ -109,7 +108,7 @@ namespace ZipWork
                 ActurisMTA = FilesCount;
                 return true;
             }   
-            if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("RNC"))
+            if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("RNL"))
             {
                 ActurisRNC = FilesCount;
                 return true;
@@ -126,7 +125,7 @@ namespace ZipWork
                 AppliedMTA = FilesCount;
                 return true;
             }
-            if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("RNC"))
+            if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("RNL"))
             {
                 AppliedRNC = FilesCount;
                 return true;
@@ -143,7 +142,7 @@ namespace ZipWork
                 CDLMTA = FilesCount;
                 return true;
             }
-            if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("RNC"))
+            if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("RNL"))
             {
                 CDLRNC = FilesCount;
                 return true;
@@ -162,7 +161,7 @@ namespace ZipWork
                 return true;
             }
                 
-            if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("RNC"))
+            if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("RNL"))
             {
                 SSPRNC = FilesCount;
                 return true;
@@ -171,13 +170,46 @@ namespace ZipWork
             return false;
         }
 
+        public void AssignToExcell()
+        {
+            ExcellInterface myXls = new ExcellInterface();
+
+            myXls.ActurisNB = this.ActurisNB;
+            myXls.ActurisMTA = this.ActurisMTA;
+            myXls.ActurisRNC = this.ActurisRNC;
+
+            myXls.AppliedNB = this.AppliedNB;
+            myXls.AppliedMTA = this.AppliedMTA;
+            myXls.AppliedRNC = this.AppliedRNC;
+
+            myXls.CDLNB = this.CDLNB;
+            myXls.CDLMTA = this.CDLMTA;
+            myXls.CDLRNC = this.CDLRNC;
+
+            myXls.SSPNB = this.SSPNB;
+            myXls.SSPMTA = this.SSPMTA;
+            myXls.SSPRNC = this.SSPRNC;
+
+            myXls.SheetName = TodaysDate;
+            myXls.OpenXls();  // Open Xls files here and do all the check
+        }
+        public bool MakeZipFile(string ZipFolder, string FileZipName)
+        {
+            Console.WriteLine("Zipping all zip files into package.zip...");
+            ZipFile.CreateFromDirectory(ZipFolder, FileZipName);
+            return true;
+        }
+
         public string ZipFilesPath
         {
             get { return wPath; }
             set { wPath = value; }
 
         }
-
+        public string TodaysDate { 
+            get { return wTodaysDate; }
+            set { wTodaysDate = value; } 
+        }
 
     }
 }
