@@ -59,10 +59,30 @@ namespace ZipWork
             foreach (string filename in FilesCollect)
             {
                 string wFilename = Path.GetFileName(filename);
-                File.Move(filename, wZipPath + wFilename);
-                Console.WriteLine($"File {filename} moved to {wZipPath+wFilename}");
+                if (this.PlumZipFiles)
+                    MovePlumFilesToPath(filename, wFilename);
+                else
+                {
+                    File.Move(filename, wZipPath + wFilename);
+                    Console.WriteLine($"File {filename} moved to {wZipPath + wFilename}");
+                }
             }
             return true;
+        }
+        
+        private void MovePlumFilesToPath(string wPlumFullPath, string wPlumFilename)
+        {
+            string FullPath = wZipPath + wPlumFilename;
+
+            if(wPlumFilename.Contains("EDI messages") && wPlumFilename.Length > 27)
+            {
+                if(wPlumFilename.Contains("NB") || wPlumFilename.Contains("MTA") || wPlumFilename.Contains("RNL"))
+                {
+                    File.Move(wPlumFullPath, FullPath);
+                    Console.WriteLine($"File {wPlumFilename} moved to {wZipPath + wPlumFilename}");
+                }
+            }
+            Console.WriteLine($"File {wPlumFilename} is not a valid Plum file!");
         }
 
         public string OriginalPath
