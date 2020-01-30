@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WebInterface.cs" />
     <Compile Remove="ZipFileCS.cs" />
   </ItemGroup>
 

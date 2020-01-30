@@ -11,7 +11,7 @@ namespace ZipWork
         private string wZipPath;
         private string myExtension;
         private bool DevOption;
-        private bool PlumZipFiles;
+        private bool SpecZipFiles;
 
         public string FolderName;
 
@@ -59,8 +59,8 @@ namespace ZipWork
             foreach (string filename in FilesCollect)
             {
                 string wFilename = Path.GetFileName(filename);
-                if (this.PlumZipFiles)
-                    MovePlumFilesToPath(filename, wFilename);
+                if (this.SpecZipFiles)
+                    MoveSpecFilesToPath(filename, wFilename);
                 else
                 {
                     File.Move(filename, wZipPath + wFilename);
@@ -70,19 +70,19 @@ namespace ZipWork
             return true;
         }
         
-        private void MovePlumFilesToPath(string wPlumFullPath, string wPlumFilename)
+        private void MoveSpecFilesToPath(string wSpecFullPath, string wSpecFilename)
         {
-            string FullPath = wZipPath + wPlumFilename;
+            string FullPath = wZipPath + wSpecFilename;
 
-            if(wPlumFilename.Contains("EDI messages") && wPlumFilename.Length > 27)
+            if(wSpecFilename.Contains("EDI messages") && wSpecFilename.Length > 27)
             {
-                if(wPlumFilename.Contains("NB") || wPlumFilename.Contains("MTA") || wPlumFilename.Contains("RNL"))
+                if(wSpecFilename.Contains("NB") || wSpecFilename.Contains("MTA") || wSpecFilename.Contains("RNL"))
                 {
-                    File.Move(wPlumFullPath, FullPath);
-                    Console.WriteLine($"File {wPlumFilename} moved to {wZipPath + wPlumFilename}");
+                    File.Move(wSpecFullPath, FullPath);
+                    Console.WriteLine($"File {wSpecFilename} moved to {wZipPath + wSpecFilename}");
                 }
             }
-            Console.WriteLine($"File {wPlumFilename} is not a valid Plum file!");
+            Console.WriteLine($"File {wSpecFilename} is not a valid Spec file!");
         }
 
         public string OriginalPath
@@ -106,9 +106,9 @@ namespace ZipWork
             get { return DevOption; }
         }
 
-        public bool IsPlum {
-            get { return PlumZipFiles ; }
-            set { PlumZipFiles = value ; }
+        public bool IsSpecific {
+            get { return SpecZipFiles ; }
+            set { SpecZipFiles = value ; }
         }
     }
 
