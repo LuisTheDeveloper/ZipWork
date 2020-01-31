@@ -26,9 +26,10 @@ namespace ZipWork
 
         public string SheetName;
 
-        public void OpenXls()
+        public void OpenXls(string ExcellPath)
         {
-            var fi = new FileInfo(@"c:\temp\Exceptions.xlsx");
+            string ExcellFilePath = ExcellPath + "Exceptions.xlsx";
+            var fi = new FileInfo(@ExcellFilePath);
             using (var p = new ExcelPackage(fi))
             {
                 Console.WriteLine($"Opening Excel File {fi.Name} to save zipfile count...");

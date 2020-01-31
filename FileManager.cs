@@ -70,7 +70,7 @@ namespace ZipWork
             return true;
         }
         
-        private void MoveSpecFilesToPath(string wSpecFullPath, string wSpecFilename)
+        private bool MoveSpecFilesToPath(string wSpecFullPath, string wSpecFilename)
         {
             string FullPath = wZipPath + wSpecFilename;
 
@@ -80,9 +80,11 @@ namespace ZipWork
                 {
                     File.Move(wSpecFullPath, FullPath);
                     Console.WriteLine($"File {wSpecFilename} moved to {wZipPath + wSpecFilename}");
+                    return true;
                 }
             }
             Console.WriteLine($"File {wSpecFilename} is not a valid Spec file!");
+            return false;
         }
 
         public string OriginalPath

@@ -14,6 +14,9 @@ namespace ZipWork
         private string ZipFileName;
         private string wTodaysDate;
 
+        // Total number of files inside each zip file
+        private int TotalNumFiles;
+
         public int FileCount;
 
         public int ActurisNB;
@@ -48,17 +51,20 @@ namespace ZipWork
         {
             string[] ZipFolder = Directory.GetFiles(wPath, "*.zip");
 
+            TotalNumFiles = 0;
             // Looping through all zip files in the daily zip folder:
             Console.WriteLine("Counting number of files inside each zip file...");
             foreach (string filename in ZipFolder)
             {
                 ZipFileName = filename; // Get the zip filename
                 FileCount = NumberOfItems();
+                TotalNumFiles += FileCount;
                 Console.WriteLine($"filename {ZipFileName} has {FileCount} files inside.");
                 if (!(CheckProvider(ZipFileName, FileCount)))
                     Console.WriteLine($"File:{ZipFileName} is Wrong");
             }
-            return false;
+            Console.WriteLine($"Total number of files to be processed: {TotalNumFiles}.");
+            return true;
         }
 
         //Count the number of files inside the zip file
@@ -170,7 +176,7 @@ namespace ZipWork
             return false;
         }
 
-        public void AssignToExcell()
+        public void AssignToExcell(string ExcellPath)
         {
             ExcellInterface myXls = new ExcellInterface();
 
@@ -191,7 +197,7 @@ namespace ZipWork
             myXls.SSPRNC = this.SSPRNC;
 
             myXls.SheetName = TodaysDate;
-            myXls.OpenXls();  // Open Xls files here and do all the check
+            myXls.OpenXls(ExcellPath);  // Open Xls files here and do all the check
         }
         public bool MakeZipFile(string ZipFolder, string FileZipName)
         {

@@ -7,11 +7,14 @@ namespace ZipWork
     class SeleniumTech
     {
 
-        public void TestNewCode()
+        public void TestNewCode(string UrlPath)
         {
             using (var driver = new OpenQA.Selenium.Chrome.ChromeDriver())
             {
-                driver.Navigate().GoToUrl("https://www.google.com/");
+                UrlPath = "https://www.google.com/" + UrlPath;
+
+                driver.Navigate().GoToUrl(UrlPath);
+                /*
                 var searchBox = driver.FindElement(OpenQA.Selenium.By.XPath("//input[@class='gLFyf gsfi']"));
                 searchBox.SendKeys("webdriver example c#");
                 searchBox.SendKeys(OpenQA.Selenium.Keys.Return);
@@ -24,9 +27,9 @@ namespace ZipWork
                 firstlink.Click();
 
 
-
+    */
                 System.Threading.Thread.Sleep(10000);
-
+                
 
 
             }
