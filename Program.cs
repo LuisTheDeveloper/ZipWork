@@ -12,14 +12,15 @@ namespace ZipWork
             // Get current date and convert to a string
             string TodaysDate = DateTime.Now.ToString("ddMMyyyy");
 
-            /* SeleniumTech mySelen = new SeleniumTech();*/
+            SeleniumTech mySelen = new SeleniumTech();  /* Selenium */
             FileManager myFiles = new FileManager();
             ZipManager myZips = new ZipManager();
 
-           /* Console.WriteLine("string for path:");
+            //Selenium *    *   Begin
+            Console.WriteLine("string for path:");
             string v = Console.ReadLine();
             mySelen.TestNewCode(v);
-            */
+            //Selenium *    *   End
 
             myZips.TodaysDate = TodaysDate;
             myFiles.FolderName = TodaysDate;
