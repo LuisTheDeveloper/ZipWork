@@ -13,7 +13,7 @@ namespace ZipWork
             
             using (var driver = new OpenQA.Selenium.Chrome.ChromeDriver())
             {
-                UrlPath = "confidentialPath/" + UrlPath;
+                UrlPath = "https://confidentialPath.co.uk/browse/" + UrlPath;
 
                 driver.Navigate().GoToUrl(UrlPath);
 
@@ -28,9 +28,9 @@ namespace ZipWork
                     if (item.GetAttribute("data-downloadurl").ToString().StartsWith("application/zip:"))
                     {
                         item.Click();
+                        System.Threading.Thread.Sleep(3000);
                         Console.WriteLine("Downloading File...");
                     }
-                    System.Threading.Thread.Sleep(2000);
                 }
             }
         }

@@ -17,9 +17,15 @@ namespace ZipWork
             ZipManager myZips = new ZipManager();
 
             //Selenium *    *   Begin
-            Console.WriteLine("string for path:");
+            Console.WriteLine("string for path: (Q to exit)");
             string v = Console.ReadLine();
-            mySelen.TestNewCode(v);
+            if (v.ToUpper() == "Q")
+                Environment.Exit(0);
+            else
+            {
+                mySelen.TestNewCode(v);
+            }
+            
             //Selenium *    *   End
 
             myZips.TodaysDate = TodaysDate;

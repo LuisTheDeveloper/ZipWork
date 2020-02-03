@@ -27,7 +27,7 @@ namespace ZipWork
         public void SetPaths()
         {
             if (DevOption)  //if dev unit testing use a temporary folder
-                myPath = "C:\\temp\\";
+                myPath = "C:\\users\\lmagalhaes\\downloads\\";
             else
                 myPath = Directory.GetCurrentDirectory() + "\\";
 
