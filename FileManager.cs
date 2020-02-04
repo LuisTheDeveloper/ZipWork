@@ -15,6 +15,7 @@ namespace ZipWork
 
         public string FolderName;
 
+
         public FileManager()
         {
             if (File.Exists("dev.txt"))

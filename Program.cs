@@ -8,7 +8,7 @@ namespace ZipWork
        
         static void Main(string[] args)
         {
-            
+            string userRes;
             // Get current date and convert to a string
             string TodaysDate = DateTime.Now.ToString("ddMMyyyy");
 
@@ -18,12 +18,12 @@ namespace ZipWork
 
             //Selenium *    *   Begin
             Console.WriteLine("string for path: (Q to Quit)");
-            string userRes = Console.ReadLine();
+            userRes = Console.ReadLine();
             if (userRes.ToUpper() == "Q")
             {
                 Environment.Exit(0);
             }
-                
+
             mySelen.TestNewCode(userRes);
             //Selenium *    *   End
 
@@ -53,7 +53,7 @@ namespace ZipWork
 
             Console.WriteLine("Files have been recorded into Excell and are prepared to be sent.");
             Console.WriteLine("Press any key to exit");
-            string s = Console.ReadLine();
+            _ = Console.ReadLine();
         }
     }
 }

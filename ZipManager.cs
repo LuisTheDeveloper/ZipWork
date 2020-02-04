@@ -12,7 +12,6 @@ namespace ZipWork
         private string wPath;
         private string wInfo;
         private string ZipFileName;
-        private string wTodaysDate;
 
         // Total number of files inside each zip file
         private int TotalNumFiles;
@@ -220,10 +219,7 @@ namespace ZipWork
             set { wPath = value; }
 
         }
-        public string TodaysDate { 
-            get { return wTodaysDate; }
-            set { wTodaysDate = value; } 
-        }
 
+        public string TodaysDate { get; set; }
     }
 }
