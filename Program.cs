@@ -17,15 +17,14 @@ namespace ZipWork
             ZipManager myZips = new ZipManager();
 
             //Selenium *    *   Begin
-            Console.WriteLine("string for path: (Q to exit)");
-            string v = Console.ReadLine();
-            if (v.ToUpper() == "Q")
-                Environment.Exit(0);
-            else
+            Console.WriteLine("string for path: (Q to Quit)");
+            string userRes = Console.ReadLine();
+            if (userRes.ToUpper() == "Q")
             {
-                mySelen.TestNewCode(v);
+                Environment.Exit(0);
             }
-            
+                
+            mySelen.TestNewCode(userRes);
             //Selenium *    *   End
 
             myZips.TodaysDate = TodaysDate;
@@ -39,11 +38,18 @@ namespace ZipWork
 
             myZips.ZipFilesPath = myFiles.DestinPath;   // Tells to the ZIP object what is the current daily zip folder
             myZips.CheckZipFolder();
-            string OriginPath = myFiles.OriginalPath;
+            string OriginPath = myFiles.OriginalPath;  // This is the original folder where the zip files have been downloaded 
             myZips.AssignToExcell(OriginPath);
 
+            Console.WriteLine($"Zipping all zip files from {myFiles.DestinPath} into package.zip");
+            Console.WriteLine("Is this correct? (Y=Yes to continue, any other key will exit).");
+            userRes = Console.ReadLine();
+            if (userRes.ToUpper() != "Y")
+            {
+                Environment.Exit(0);
+            }
 
-            //myZips.MakeZipFile(myFiles.DestinPath, myFiles.DestinPath + "package");
+            //myZips MakeZipFile(myFiles.DestinPath, myFiles.DestinPath + "package");
 
             Console.WriteLine("Files have been recorded into Excell and are prepared to be sent.");
             Console.WriteLine("Press any key to exit");

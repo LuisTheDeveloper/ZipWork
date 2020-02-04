@@ -61,7 +61,9 @@ namespace ZipWork
                 TotalNumFiles += FileCount;
                 Console.WriteLine($"filename {ZipFileName} has {FileCount} files inside.");
                 if (!(CheckProvider(ZipFileName, FileCount)))
+                {
                     Console.WriteLine($"File:{ZipFileName} is Wrong");
+                }
             }
             Console.WriteLine($"Total number of files to be processed: {TotalNumFiles}.");
             return true;
@@ -85,7 +87,9 @@ namespace ZipWork
                     foreach (var entry in csZipArchive.Entries)
                     {
                         if (!string.IsNullOrEmpty(entry.Name))
+                        {
                             wFileCount += 1;
+                        }
                     }
             }
             catch (UnauthorizedAccessException)
@@ -95,7 +99,9 @@ namespace ZipWork
             finally
             {
                 if (wInfo.Length > 0)
+                {
                     wFileCount = 0;
+                }
             }
 
             return wFileCount;
@@ -201,7 +207,9 @@ namespace ZipWork
         }
         public bool MakeZipFile(string ZipFolder, string FileZipName)
         {
-            Console.WriteLine("Zipping all zip files into package.zip...");
+            Console.WriteLine($"Zipping all zip files from {ZipFolder} into {FileZipName}...");
+            
+
             ZipFile.CreateFromDirectory(ZipFolder, FileZipName);
             return true;
         }

@@ -18,18 +18,26 @@ namespace ZipWork
         public FileManager()
         {
             if (File.Exists("dev.txt"))
+            {
                 DevOption = true;
+            }
             else
+            {
                 DevOption = false;
+            }
         }
 
         // This method creates the folder for the zip files to be downloaded
         public void SetPaths()
         {
-            if (DevOption)  //if dev unit testing use a temporary folder
+            if (DevOption)  //if dev unit testing use a temporary folder 
+            {
                 myPath = "C:\\users\\lmagalhaes\\downloads\\";
+            }
             else
+            {
                 myPath = Directory.GetCurrentDirectory() + "\\";
+            }
 
             wZipPath = myPath + FolderName + "\\";
             Console.WriteLine($"Is this path: {wZipPath} correct? Y=Yes/N=No");
@@ -60,7 +68,9 @@ namespace ZipWork
             {
                 string wFilename = Path.GetFileName(filename);
                 if (this.SpecZipFiles)
+                {
                     MoveSpecFilesToPath(filename, wFilename);
+                } 
                 else
                 {
                     File.Move(filename, wZipPath + wFilename);
