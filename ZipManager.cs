@@ -111,70 +111,70 @@ namespace ZipWork
             // Acturis Processing
             if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("NB"))
             {
-                ActurisNB = FilesCount;
+                ActurisNB += FilesCount;
                 return true;
             }
             if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("MTA"))
             {
-                ActurisMTA = FilesCount;
+                ActurisMTA += FilesCount;
                 return true;
             }   
             if (wZipFileName.ToUpper().Contains("ACTURIS") && wZipFileName.ToUpper().Contains("RNL"))
             {
-                ActurisRNC = FilesCount;
+                ActurisRNC += FilesCount;
                 return true;
             }
 
             // Applied Processing
             if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("NB"))
             {
-                AppliedNB = FilesCount;
+                AppliedNB += FilesCount;
                 return true;
             }
             if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("MTA"))
             {
-                AppliedMTA = FilesCount;
+                AppliedMTA += FilesCount;
                 return true;
             }
             if (wZipFileName.ToUpper().Contains("APPLIED") && wZipFileName.ToUpper().Contains("RNL"))
             {
-                AppliedRNC = FilesCount;
+                AppliedRNC += FilesCount;
                 return true;
             }
                 
             // CDL Processing
             if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("NB"))
             {
-                CDLNB = FilesCount;
+                CDLNB += FilesCount;
                 return true;
             }
             if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("MTA"))
             {
-                CDLMTA = FilesCount;
+                CDLMTA += FilesCount;
                 return true;
             }
             if (wZipFileName.ToUpper().Contains("CDL") && wZipFileName.ToUpper().Contains("RNL"))
             {
-                CDLRNC = FilesCount;
+                CDLRNC += FilesCount;
                 return true;
             }
                 
             // SSP Processing
             if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("NB"))
             {
-                SSPNB = FilesCount;
+                SSPNB += FilesCount;
                 return true;
             }
                 
             if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("MTA"))
             {
-                SSPMTA = FilesCount;
+                SSPMTA += FilesCount;
                 return true;
             }
                 
             if (wZipFileName.ToUpper().Contains("SSP") && wZipFileName.ToUpper().Contains("RNL"))
             {
-                SSPRNC = FilesCount;
+                SSPRNC += FilesCount;
                 return true;
             }
                 

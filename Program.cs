@@ -16,7 +16,7 @@ namespace ZipWork
             FileManager myFiles = new FileManager();
             ZipManager myZips = new ZipManager();
 
-            //Selenium *    *   Begin 
+            //Selenium *    *   Begin
             Console.WriteLine("string for path: (Q to Quit)");
             userRes = Console.ReadLine();
             if (userRes.ToUpper() == "Q")

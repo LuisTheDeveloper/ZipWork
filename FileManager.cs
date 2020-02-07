@@ -89,6 +89,11 @@ namespace ZipWork
             {
                 if(wSpecFilename.Contains("NB") || wSpecFilename.Contains("MTA") || wSpecFilename.Contains("RNL"))
                 {
+                    //check if the destinantion file already exists
+                    if (File.Exists(FullPath))
+                    {
+                        File.Delete(FullPath);
+                    }
                     File.Move(wSpecFullPath, FullPath);
                     Console.WriteLine($"File {wSpecFilename} moved to {wZipPath + wSpecFilename}");
                     return true;
