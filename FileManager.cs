@@ -85,7 +85,7 @@ namespace ZipWork
         {
             string FullPath = wZipPath + wSpecFilename;
 
-            if(wSpecFilename.Contains("EDI messages") && wSpecFilename.Length > 27)
+            if((wSpecFilename.Contains("EDI messages") || wSpecFilename.Contains("EDI mesages")) && wSpecFilename.Length > 27)
             {
                 if(wSpecFilename.Contains("NB") || wSpecFilename.Contains("MTA") || wSpecFilename.Contains("RNL"))
                 {
