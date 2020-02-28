@@ -41,13 +41,7 @@ namespace ZipWork
             }
 
             wZipPath = myPath + FolderName + "\\";
-            Console.WriteLine($"Is this path: {wZipPath} correct? Y=Yes/N=No");
-            string response = Console.ReadLine();
-            if (response.ToUpper() == "N")
-            {
-                Console.WriteLine("Please type destination folder name:");
-                wZipPath = Console.ReadLine();
-            }
+            Console.WriteLine($"Moving files to {wZipPath} folder.");
 
             // Create the ZIP folder here:
             if (!Directory.Exists(wZipPath))
