@@ -204,12 +204,16 @@ namespace ZipWork
             myXls.SheetName = TodaysDate;
             myXls.OpenXls(ExcellPath);  // Open Xls files here and do all the check
         }
-        public bool MakeZipFile(string ZipFolder, string FileZipName)
+        public bool MakeZipFile(string[] ZipFiles, string ZipPath)
         {
-            Console.WriteLine($"Zipping all zip files from {ZipFolder} into {FileZipName}...");
-            
+            string wMainZipFileName = ZipPath + "package.zip";
+            ZipArchive zip = ZipFile.Open(wMainZipFileName, ZipArchiveMode.Create);
+            foreach (string file in ZipFiles)
+            {
+                zip.CreateEntryFromFile(file, Path.GetFileName(file), CompressionLevel.Optimal);
+            }
+            zip.Dispose();
 
-            ZipFile.CreateFromDirectory(ZipFolder, FileZipName);
             return true;
         }
 

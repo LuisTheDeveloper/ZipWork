@@ -56,8 +56,10 @@ namespace ZipWork
         // from the original folder - myPath to the new folder - wZipPath
         public bool MoveFilesToPath()
         {
+            ZipManager myZips = new ZipManager();
             string[] FilesCollect = Directory.GetFiles(myPath, myExtension);
 
+            //Moving files to specific folder
             Console.WriteLine("Moving Files...");
             foreach (string filename in FilesCollect)
             {
@@ -72,6 +74,11 @@ namespace ZipWork
                     Console.WriteLine($"File {filename} moved to {wZipPath + wFilename}");
                 }
             }
+
+            string[] AllZipFiles = Directory.GetFiles(wZipPath, myExtension);
+            //zipping all files from the folder into one zip file named "Package.zip"
+            myZips.MakeZipFile(AllZipFiles, wZipPath);
+
             return true;
         }
         
