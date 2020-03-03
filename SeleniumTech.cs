@@ -14,7 +14,7 @@ namespace ZipWork
             using (var driver = new OpenQA.Selenium.Chrome.ChromeDriver())
             {
                 UrlPath = "https://privatepath.co.uk/browse/" + UrlPath;
-                
+               
                 driver.Navigate().GoToUrl(UrlPath);
 
                 System.Threading.Thread.Sleep(15000);
